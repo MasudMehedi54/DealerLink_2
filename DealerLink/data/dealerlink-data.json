@@ -1,0 +1,60 @@
+{
+  "settings": {
+    "appName": "DealerLink",
+    "currencySymbol": "৳",
+    "lowStockThreshold": 10,
+    "orderMonitorIntervalSeconds": 10,
+    "inventoryCheckIntervalSeconds": 30,
+    "weatherApiUrl": "https://api.open-meteo.com/v1/forecast"
+  },
+
+  "users": [
+    {
+      "username": "shop1",
+      "password": "1234",
+      "role": "SHOP",
+      "fullName": "City Grocery Mart",
+      "location": "Khulna",
+      "latitude": 22.8456,
+      "longitude": 89.5403
+    },
+    {
+      "username": "dealer1",
+      "password": "1234",
+      "role": "DEALER",
+      "fullName": "Northern Distributors",
+      "location": "Khulna",
+      "latitude": 22.8100,
+      "longitude": 89.5600
+    },
+    {
+      "username": "dealer2",
+      "password": "1234",
+      "role": "DEALER",
+      "fullName": "Sundarban Traders",
+      "location": "Jashore",
+      "latitude": 23.1667,
+      "longitude": 89.2083
+    }
+  ],
+
+  "products": [
+    { "name": "Rice (Miniket) 25kg", "category": "Grocery",     "unit": "bag" },
+    { "name": "Cooking Oil 5L",      "category": "Grocery",     "unit": "can" },
+    { "name": "Lentils (Masoor) 1kg","category": "Grocery",     "unit": "pack" },
+    { "name": "Paracetamol 500mg",   "category": "Pharmacy",    "unit": "box" },
+    { "name": "Hand Sanitizer 500ml","category": "Pharmacy",    "unit": "bottle" },
+    { "name": "LED Bulb 9W",         "category": "Electronics", "unit": "pcs" },
+    { "name": "Extension Board 4-Port", "category": "Electronics", "unit": "pcs" }
+  ],
+
+  "inventory": [
+    { "dealerUsername": "dealer1", "productName": "Rice (Miniket) 25kg",  "quantity": 100, "unitPrice": 1450.00 },
+    { "dealerUsername": "dealer1", "productName": "Cooking Oil 5L",       "quantity": 60,  "unitPrice": 850.00 },
+    { "dealerUsername": "dealer1", "productName": "Lentils (Masoor) 1kg", "quantity": 8,   "unitPrice": 135.00 },
+    { "dealerUsername": "dealer2", "productName": "Rice (Miniket) 25kg",  "quantity": 40,  "unitPrice": 1420.00 },
+    { "dealerUsername": "dealer2", "productName": "Paracetamol 500mg",    "quantity": 200, "unitPrice": 45.00 },
+    { "dealerUsername": "dealer2", "productName": "LED Bulb 9W",          "quantity": 500, "unitPrice": 120.00 },
+    { "dealerUsername": "dealer2", "productName": "Hand Sanitizer 500ml", "quantity": 5,   "unitPrice": 180.00 }
+  ]
+}

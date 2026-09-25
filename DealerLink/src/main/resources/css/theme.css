@@ -1,0 +1,616 @@
+/* =========================================================================
+   DealerLink Theme  -  v2
+   -------------------------------------------------------------------------
+   All colors are defined ONCE as "looked-up colors" on .root below, then
+   referenced everywhere by name (e.g. -dl-primary). To re-brand the app,
+   change the tokens here - nothing else.
+
+   Look:
+     - Auth screens (Login/Register): vivid indigo -> violet gradient with a
+       floating white glass-like card.
+     - Dashboards: soft neutral canvas, gradient header bar, pill tabs,
+       card-like content, zebra tables with hover, colored status badges.
+     - Every interactive control has a hover, focus and pressed state.
+   ========================================================================= */
+
+.root {
+    /* ---- Brand ---- */
+    -dl-primary:        #4F46E5;   /* indigo 600 */
+    -dl-primary-hover:  #4338CA;   /* indigo 700 */
+    -dl-primary-dark:   #312E81;   /* indigo 900 */
+    -dl-primary-soft:   #EEF2FF;   /* indigo 50  */
+    -dl-primary-ring:   rgba(79, 70, 229, 0.30);
+    -dl-accent:         #7C3AED;   /* violet 600 */
+    -dl-accent-2:       #DB2777;   /* pink 600   */
+
+    /* ---- Semantic ---- */
+    -dl-success:        #059669;
+    -dl-success-soft:   #D1FAE5;
+    -dl-success-text:   #047857;
+    -dl-warning:        #D97706;
+    -dl-warning-soft:   #FEF3C7;
+    -dl-warning-text:   #B45309;
+    -dl-danger:         #E11D48;
+    -dl-danger-hover:   #BE123C;
+    -dl-danger-soft:    #FFE4E6;
+    -dl-danger-text:    #BE123C;
+    -dl-info-soft:      #E0E7FF;
+    -dl-info-text:      #4338CA;
+
+    /* ---- Neutrals ---- */
+    -dl-canvas:         #F4F6FB;
+    -dl-surface:        #FFFFFF;
+    -dl-surface-2:      #F8FAFC;
+    -dl-border:         #E2E8F0;
+    -dl-border-strong:  #CBD5E1;
+    -dl-text:           #0F172A;
+    -dl-text-2:         #475569;
+    -dl-text-3:         #94A3B8;
+
+    -fx-font-family: "Segoe UI", "Inter", "Helvetica Neue", Arial, sans-serif;
+    -fx-font-size: 13px;
+    -fx-background-color: -dl-canvas;
+    -fx-text-fill: -dl-text;
+
+    /* Makes built-in Modena controls (checkbox ticks, selection, focus) match the brand. */
+    -fx-accent: -dl-primary;
+    -fx-focus-color: -dl-primary;
+    -fx-faint-focus-color: transparent;
+    -fx-selection-bar: -dl-primary-soft;
+    -fx-selection-bar-non-focused: -dl-primary-soft;
+}
+
+/* =========================================================================
+   Screen backgrounds
+   ========================================================================= */
+.auth-root {
+    -fx-background-color:
+        radial-gradient(center 15% 10%, radius 55%, rgba(236, 72, 153, 0.45), transparent),
+        radial-gradient(center 90% 90%, radius 60%, rgba(56, 189, 248, 0.35), transparent),
+        linear-gradient(to bottom right, #312E81 0%, #4F46E5 45%, #7C3AED 100%);
+}
+.dashboard-root {
+    -fx-background-color: -dl-canvas;
+}
+
+/* =========================================================================
+   Typography  (plain .label first so the specific classes below win)
+   ========================================================================= */
+.label {
+    -fx-text-fill: -dl-text-2;
+}
+.app-title {
+    -fx-font-size: 34px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -dl-text;
+}
+.app-title-small {
+    -fx-font-size: 26px;
+}
+.app-subtitle {
+    -fx-font-size: 14px;
+    -fx-text-fill: -dl-text-2;
+}
+/* On the gradient auth background, titles turn white. */
+.auth-root .app-title {
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.35), 12, 0, 0, 3);
+}
+.auth-root .app-subtitle {
+    -fx-text-fill: rgba(255, 255, 255, 0.85);
+}
+
+.section-title {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -dl-text;
+    -fx-padding: 0 0 0 10;
+    -fx-border-color: transparent transparent transparent -dl-primary;
+    -fx-border-width: 0 0 0 3;
+}
+.hint-text {
+    -fx-text-fill: -dl-text-3;
+    -fx-font-size: 11.5px;
+}
+.error-text {
+    -fx-text-fill: -dl-danger-text;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+.success-text {
+    -fx-text-fill: -dl-success-text;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+/* =========================================================================
+   Card (Login / Register panel)
+   ========================================================================= */
+.card {
+    -fx-background-color: -dl-surface;
+    -fx-background-radius: 20;
+    -fx-border-color: rgba(255, 255, 255, 0.6);
+    -fx-border-radius: 20;
+    -fx-border-width: 1;
+    -fx-padding: 34 34 28 34;
+    -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.35), 40, 0.1, 0, 14);
+}
+.card .label {
+    -fx-text-fill: -dl-text-2;
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+}
+.card .error-text   { -fx-text-fill: -dl-danger-text; }
+.card .success-text { -fx-text-fill: -dl-success-text; }
+.card .hint-text {
+    -fx-font-weight: normal;
+    -fx-text-fill: -dl-text-3;
+}
+
+/* =========================================================================
+   Header bar (dashboards)
+   ========================================================================= */
+.header-bar {
+    -fx-background-color: linear-gradient(to right, #312E81 0%, #4F46E5 55%, #7C3AED 100%);
+    -fx-padding: 18 26;
+    -fx-effect: dropshadow(gaussian, rgba(49, 46, 129, 0.35), 18, 0, 0, 4);
+}
+.header-title {
+    -fx-text-fill: white;
+    -fx-font-size: 19px;
+    -fx-font-weight: bold;
+}
+.header-role-chip {
+    -fx-background-color: rgba(255, 255, 255, 0.16);
+    -fx-border-color: rgba(255, 255, 255, 0.35);
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-text-fill: white;
+    -fx-font-size: 10.5px;
+    -fx-font-weight: bold;
+    -fx-padding: 4 12;
+}
+
+/* =========================================================================
+   Notification bar (bottom of dashboards)
+   ========================================================================= */
+.notification-bar {
+    -fx-background-color: linear-gradient(to right, #ECFDF5, #F0FDFA);
+    -fx-text-fill: -dl-success-text;
+    -fx-font-weight: bold;
+    -fx-padding: 12 18;
+    -fx-background-radius: 12;
+    -fx-border-color: #A7F3D0 #A7F3D0 #A7F3D0 -dl-success;
+    -fx-border-width: 1 1 1 5;
+    -fx-border-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(5, 150, 105, 0.15), 14, 0, 0, 4);
+    -fx-max-width: infinity;
+}
+
+/* =========================================================================
+   Inputs: text fields, password, combo box, spinner
+   ========================================================================= */
+.text-field, .password-field {
+    -fx-background-color: -dl-surface-2;
+    -fx-background-radius: 10;
+    -fx-border-color: -dl-border-strong;
+    -fx-border-radius: 10;
+    -fx-border-width: 1.2;
+    -fx-padding: 9 12;
+    -fx-font-size: 13px;
+    -fx-text-fill: -dl-text;
+    -fx-prompt-text-fill: -dl-text-3;
+    -fx-highlight-fill: -dl-primary;
+    -fx-highlight-text-fill: white;
+}
+.text-field:hover, .password-field:hover {
+    -fx-border-color: #A5B4FC;
+}
+.text-field:focused, .password-field:focused {
+    -fx-background-color: -dl-surface;
+    -fx-border-color: -dl-primary;
+    -fx-border-width: 1.6;
+    -fx-effect: dropshadow(gaussian, -dl-primary-ring, 8, 0.4, 0, 0);
+}
+
+.combo-box, .spinner {
+    -fx-background-color: -dl-surface-2;
+    -fx-background-radius: 10;
+    -fx-border-color: -dl-border-strong;
+    -fx-border-radius: 10;
+    -fx-border-width: 1.2;
+}
+.combo-box:hover, .spinner:hover {
+    -fx-border-color: #A5B4FC;
+}
+.combo-box:focused, .spinner:focused {
+    -fx-border-color: -dl-primary;
+    -fx-border-width: 1.6;
+    -fx-effect: dropshadow(gaussian, -dl-primary-ring, 8, 0.4, 0, 0);
+}
+.combo-box .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: -dl-text;
+    -fx-padding: 6 10;
+}
+.combo-box .arrow-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0 10 0 4;
+}
+.combo-box .arrow, .spinner .increment-arrow, .spinner .decrement-arrow {
+    -fx-background-color: -dl-primary;
+}
+.combo-box-popup .list-view {
+    -fx-background-color: -dl-surface;
+    -fx-background-radius: 10;
+    -fx-border-color: -dl-border;
+    -fx-border-radius: 10;
+    -fx-padding: 4;
+    -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.18), 16, 0, 0, 6);
+}
+.combo-box-popup .list-view .list-cell {
+    -fx-padding: 8 12;
+    -fx-background-radius: 6;
+    -fx-text-fill: -dl-text;
+}
+.combo-box-popup .list-view .list-cell:hover {
+    -fx-background-color: -dl-primary-soft;
+}
+.combo-box-popup .list-view .list-cell:selected {
+    -fx-background-color: -dl-primary;
+    -fx-text-fill: white;
+}
+
+.spinner .text-field {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+    -fx-effect: null;
+}
+.spinner .increment-arrow-button, .spinner .decrement-arrow-button {
+    -fx-background-color: -dl-primary-soft;
+    -fx-background-radius: 0 9 0 0;
+    -fx-padding: 4 8;
+}
+.spinner .decrement-arrow-button {
+    -fx-background-radius: 0 0 9 0;
+}
+.spinner .increment-arrow-button:hover, .spinner .decrement-arrow-button:hover {
+    -fx-background-color: #C7D2FE;
+}
+
+/* Validation error state - added from Java with getStyleClass().add("input-error") */
+.text-field.input-error, .password-field.input-error {
+    -fx-border-color: -dl-danger;
+    -fx-border-width: 1.6;
+    -fx-background-color: #FFF1F2;
+    -fx-effect: dropshadow(gaussian, rgba(225, 29, 72, 0.25), 8, 0.4, 0, 0);
+}
+
+/* Check box */
+.check-box .box {
+    -fx-background-color: -dl-surface;
+    -fx-border-color: -dl-border-strong;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+.check-box:selected .box {
+    -fx-background-color: -dl-primary;
+    -fx-border-color: -dl-primary;
+}
+.check-box:selected .mark {
+    -fx-background-color: white;
+}
+.check-box .text {
+    -fx-fill: -dl-text-2;
+}
+
+/* =========================================================================
+   Buttons
+   ========================================================================= */
+.button {
+    -fx-cursor: hand;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+/* Primary: gradient, glow on hover, lifts slightly */
+.button-primary {
+    -fx-background-color: linear-gradient(to right, -dl-primary, -dl-accent);
+    -fx-text-fill: white;
+    -fx-padding: 11 22;
+    -fx-effect: dropshadow(gaussian, rgba(79, 70, 229, 0.30), 10, 0, 0, 3);
+}
+.button-primary:hover {
+    -fx-background-color: linear-gradient(to right, -dl-primary-hover, #6D28D9);
+    -fx-effect: dropshadow(gaussian, rgba(79, 70, 229, 0.45), 16, 0, 0, 5);
+    -fx-translate-y: -1;
+}
+.button-primary:pressed {
+    -fx-background-color: -dl-primary-dark;
+    -fx-translate-y: 0;
+    -fx-effect: null;
+}
+.button-primary:disabled {
+    -fx-background-color: #A5B4FC;
+    -fx-opacity: 0.75;
+    -fx-effect: null;
+}
+
+/* Secondary: outline */
+.button-secondary {
+    -fx-background-color: -dl-surface;
+    -fx-text-fill: -dl-primary;
+    -fx-border-color: #C7D2FE;
+    -fx-border-width: 1.4;
+    -fx-padding: 9 18;
+}
+.button-secondary:hover {
+    -fx-background-color: -dl-primary-soft;
+    -fx-border-color: -dl-primary;
+}
+.button-secondary:pressed {
+    -fx-background-color: #E0E7FF;
+}
+
+/* Danger */
+.button-danger {
+    -fx-background-color: -dl-danger;
+    -fx-text-fill: white;
+    -fx-padding: 9 18;
+}
+.button-danger:hover { -fx-background-color: -dl-danger-hover; }
+
+/* Ghost: text-only link style */
+.button-ghost {
+    -fx-background-color: transparent;
+    -fx-text-fill: -dl-text-2;
+    -fx-padding: 8 14;
+    -fx-font-weight: normal;
+}
+.button-ghost:hover {
+    -fx-background-color: -dl-surface-2;
+    -fx-text-fill: -dl-primary;
+}
+
+/* Translucent button on the gradient header (Logout) */
+.button-header {
+    -fx-background-color: rgba(255, 255, 255, 0.14);
+    -fx-text-fill: white;
+    -fx-border-color: rgba(255, 255, 255, 0.45);
+    -fx-border-width: 1.2;
+    -fx-padding: 8 18;
+}
+.button-header:hover {
+    -fx-background-color: white;
+    -fx-text-fill: -dl-primary;
+    -fx-border-color: white;
+}
+
+/* Role toggle pills (Register screen) */
+.toggle-pill {
+    -fx-background-color: -dl-surface-2;
+    -fx-text-fill: -dl-text-2;
+    -fx-border-color: -dl-border-strong;
+    -fx-border-radius: 22;
+    -fx-background-radius: 22;
+    -fx-padding: 10 20;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+.toggle-pill:hover {
+    -fx-border-color: -dl-primary;
+    -fx-text-fill: -dl-primary;
+}
+.toggle-pill:selected {
+    -fx-background-color: linear-gradient(to right, -dl-primary, -dl-accent);
+    -fx-text-fill: white;
+    -fx-border-color: transparent;
+    -fx-effect: dropshadow(gaussian, rgba(79, 70, 229, 0.35), 10, 0, 0, 3);
+}
+
+/* =========================================================================
+   Tabs: pill-style navigation above a white content card
+   ========================================================================= */
+.tab-pane > .tab-header-area {
+    -fx-padding: 4 0 10 0;
+}
+.tab-pane > .tab-header-area > .tab-header-background {
+    -fx-background-color: transparent;
+}
+.tab-pane .tab {
+    -fx-background-color: transparent;
+    -fx-background-radius: 22;
+    -fx-padding: 8 18;
+    -fx-cursor: hand;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+.tab-pane .tab:hover {
+    -fx-background-color: #E0E7FF;
+}
+.tab-pane .tab:selected {
+    -fx-background-color: linear-gradient(to right, -dl-primary, -dl-accent);
+    -fx-effect: dropshadow(gaussian, rgba(79, 70, 229, 0.30), 10, 0, 0, 3);
+}
+.tab-pane .tab .tab-label {
+    -fx-text-fill: -dl-text-2;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+}
+.tab-pane .tab:selected .tab-label {
+    -fx-text-fill: white;
+}
+.tab-pane .tab:selected .focus-indicator {
+    -fx-border-color: transparent;
+}
+.tab-pane > .tab-content-area {
+    -fx-background-color: -dl-surface;
+    -fx-background-radius: 16;
+    -fx-border-color: -dl-border;
+    -fx-border-radius: 16;
+    -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.08), 20, 0, 0, 6);
+}
+
+/* =========================================================================
+   Tables
+   ========================================================================= */
+.table-view {
+    -fx-background-color: -dl-surface;
+    -fx-background-radius: 12;
+    -fx-border-color: -dl-border;
+    -fx-border-radius: 12;
+    -fx-padding: 0;
+    -fx-table-cell-border-color: transparent;
+}
+.table-view:focused {
+    -fx-background-insets: 0;
+    -fx-border-color: #C7D2FE;
+}
+.table-view .column-header-background {
+    -fx-background-color: -dl-surface-2;
+    -fx-background-radius: 12 12 0 0;
+}
+.table-view .column-header, .table-view .filler {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent -dl-border transparent;
+    -fx-size: 40px;
+}
+.table-view .column-header .label {
+    -fx-text-fill: -dl-text-2;
+    -fx-font-weight: bold;
+    -fx-font-size: 11.5px;
+    -fx-alignment: CENTER-LEFT;
+    -fx-padding: 0 10;
+}
+.table-view .placeholder .label {
+    -fx-text-fill: -dl-text-3;
+    -fx-font-size: 13px;
+}
+
+.table-row-cell {
+    -fx-background-color: -dl-surface;
+    -fx-cell-size: 38px;
+    -fx-border-color: transparent transparent #F1F5F9 transparent;
+}
+.table-row-cell:odd {
+    -fx-background-color: #FAFBFE;
+}
+.table-row-cell:hover {
+    -fx-background-color: -dl-primary-soft;
+}
+.table-row-cell:selected {
+    -fx-background-color: #E0E7FF;
+    -fx-border-color: transparent transparent transparent -dl-primary;
+    -fx-border-width: 0 0 0 4;
+}
+.table-row-cell .table-cell {
+    -fx-text-fill: -dl-text;
+    -fx-padding: 0 10;
+    -fx-alignment: CENTER-LEFT;
+}
+.table-row-cell:selected .table-cell {
+    -fx-text-fill: -dl-primary-dark;
+}
+.table-row-cell:empty {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+/* Currency cells (price columns) - set from UiUtils.renderAsCurrency */
+.table-cell.currency-cell {
+    -fx-alignment: CENTER-RIGHT;
+    -fx-font-weight: bold;
+    -fx-font-family: "Consolas", "Menlo", "Segoe UI", monospace;
+}
+
+/* Highlighted rows */
+.table-row-cell.best-price-row {
+    -fx-background-color: #ECFDF5;
+    -fx-border-color: transparent transparent transparent -dl-success;
+    -fx-border-width: 0 0 0 4;
+}
+.table-row-cell.best-price-row .table-cell {
+    -fx-text-fill: -dl-success-text;
+}
+.table-row-cell.low-stock-row {
+    -fx-background-color: #FFF1F2;
+    -fx-border-color: transparent transparent transparent -dl-danger;
+    -fx-border-width: 0 0 0 4;
+}
+.table-row-cell.low-stock-row .table-cell {
+    -fx-text-fill: -dl-danger-text;
+}
+
+/* =========================================================================
+   Status badges
+   ========================================================================= */
+.badge {
+    -fx-padding: 3 12;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-border-width: 1;
+    -fx-font-size: 10.5px;
+    -fx-font-weight: bold;
+}
+.badge-open       { -fx-background-color: #DBEAFE; -fx-text-fill: #1D4ED8; -fx-border-color: #BFDBFE; }
+.badge-quoted     { -fx-background-color: -dl-warning-soft; -fx-text-fill: -dl-warning-text; -fx-border-color: #FDE68A; }
+.badge-ordered    { -fx-background-color: -dl-success-soft; -fx-text-fill: -dl-success-text; -fx-border-color: #A7F3D0; }
+.badge-closed     { -fx-background-color: #E2E8F0; -fx-text-fill: #334155; -fx-border-color: #CBD5E1; }
+.badge-pending    { -fx-background-color: #F1F5F9; -fx-text-fill: #475569; -fx-border-color: #E2E8F0; }
+.badge-accepted   { -fx-background-color: -dl-success-soft; -fx-text-fill: -dl-success-text; -fx-border-color: #A7F3D0; }
+.badge-rejected   { -fx-background-color: -dl-danger-soft; -fx-text-fill: -dl-danger-text; -fx-border-color: #FECDD3; }
+.badge-placed     { -fx-background-color: #DBEAFE; -fx-text-fill: #1D4ED8; -fx-border-color: #BFDBFE; }
+.badge-confirmed  { -fx-background-color: -dl-info-soft; -fx-text-fill: -dl-info-text; -fx-border-color: #C7D2FE; }
+.badge-shipped    { -fx-background-color: #F3E8FF; -fx-text-fill: #7E22CE; -fx-border-color: #E9D5FF; }
+.badge-delivered  { -fx-background-color: -dl-success-soft; -fx-text-fill: -dl-success-text; -fx-border-color: #A7F3D0; }
+.badge-cancelled  { -fx-background-color: -dl-danger-soft; -fx-text-fill: -dl-danger-text; -fx-border-color: #FECDD3; }
+.badge-preparing  { -fx-background-color: -dl-warning-soft; -fx-text-fill: -dl-warning-text; -fx-border-color: #FDE68A; }
+.badge-in-transit { -fx-background-color: #F3E8FF; -fx-text-fill: #7E22CE; -fx-border-color: #E9D5FF; }
+
+/* =========================================================================
+   Scroll bars (thin, rounded)
+   ========================================================================= */
+.scroll-bar {
+    -fx-background-color: transparent;
+}
+.scroll-bar:vertical { -fx-pref-width: 10; }
+.scroll-bar:horizontal { -fx-pref-height: 10; }
+.scroll-bar .thumb {
+    -fx-background-color: #CBD5E1;
+    -fx-background-radius: 8;
+    -fx-background-insets: 2;
+}
+.scroll-bar .thumb:hover { -fx-background-color: #94A3B8; }
+.scroll-bar .increment-button, .scroll-bar .decrement-button {
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+}
+.scroll-bar .increment-arrow, .scroll-bar .decrement-arrow {
+    -fx-shape: " ";
+    -fx-padding: 0;
+}
+.table-view .corner {
+    -fx-background-color: transparent;
+}
+
+/* =========================================================================
+   Misc
+   ========================================================================= */
+.tooltip {
+    -fx-background-color: #0F172A;
+    -fx-text-fill: white;
+    -fx-background-radius: 8;
+    -fx-padding: 6 10;
+    -fx-font-size: 12px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 10, 0, 0, 3);
+}
+.separator:horizontal .line {
+    -fx-border-color: -dl-border transparent transparent transparent;
+    -fx-border-width: 1 0 0 0;
+}
+.context-menu {
+    -fx-background-color: -dl-surface;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.18), 16, 0, 0, 6);
+}
